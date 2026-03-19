@@ -329,7 +329,14 @@ function rotatePiece() {
 
 function hardDrop() {
   if (!currentPiece || isGameOver) return;
-  while (movePiece(0, 1)) {}
+  let steps = 0;
+  while (movePiece(0, 1)) {
+    steps += 1;
+  }
+  if (steps > 0) {
+    // Reward hard drop distance a little so score changes quickly.
+    score += steps * 2;
+  }
   stepGame();
 }
 
@@ -339,6 +346,8 @@ function stepGame() {
   const moved = movePiece(0, 1);
   if (!moved) {
     mergePieceIntoBoard(currentPiece);
+    // Small reward for locking a piece, even without line clears.
+    score += 10;
     clearFullLines();
     render();
     spawnNewPiece();
