@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Simple Tetris</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="app">
+    <main class="landing">
+      <h1 class="landing__title">Simple Tetris</h1>
+      <p class="landing__subtitle">
+        A clean, modern take on the classic falling-block puzzle. No accounts, no clutter—just pure Tetris.
+      </p>
+
+      <ul class="landing__features">
+        <li>Smooth keyboard controls and instant restarts</li>
+        <li>Responsive layout that feels great on desktop</li>
+        <li>Score tracking and satisfying line clears</li>
+      </ul>
+
+      <div class="landing__cta">
+        <button id="play-button" class="landing__button" type="button">Play Now</button>
+        <p class="landing__hint">Use arrow keys and R to restart once you’re in the game.</p>
+      </div>
+    </main>
+  </div>
+
+  <script>
+    (function () {
+      const playButton = document.getElementById("play-button");
+      if (!playButton) return;
+
+      playButton.addEventListener("click", () => {
+        sessionStorage.setItem("tetris_entry", "1");
+        window.location.href = "game.html";
+      });
+    })();
+  </script>
+</body>
+</html>

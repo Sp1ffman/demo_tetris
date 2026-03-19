@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Play Simple Tetris</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="app">
+    <header class="app__header">
+      <h1 class="app__title">Simple Tetris</h1>
+      <div class="app__score">
+        Score:
+        <span id="score-value">0</span>
+      </div>
+    </header>
+
+    <main class="app__main">
+      <div id="tetris-board" class="board" aria-label="Tetris game board"></div>
+      <section class="app__sidebar">
+        <div class="app__instructions">
+          <h2>Controls</h2>
+          <ul>
+            <li>← / → : Move left / right</li>
+            <li>↑ : Rotate piece</li>
+            <li>↓ : Soft drop</li>
+            <li>Space: Hard drop</li>
+            <li>P : Pause</li>
+            <li>R : Restart after game over</li>
+          </ul>
+        </div>
+        <div id="status-message" class="app__status" aria-live="polite"></div>
+      </section>
+    </main>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
+
