@@ -32,9 +32,9 @@ body {
 
 .app__header {
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   justify-content: space-between;
-  gap: 1rem;
+  gap: 1.5rem;
 }
 
 .app__title {
@@ -42,8 +42,20 @@ body {
   font-size: 1.5rem;
 }
 
+.app__scores {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  align-items: flex-end;
+}
+
 .app__score {
   font-size: 1rem;
+}
+
+.app__score--secondary {
+  font-size: 0.9rem;
+  color: #9ca3af;
 }
 
 .app__main {

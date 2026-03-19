@@ -161,6 +161,10 @@ let boardElement;
 let cells = [];
 let scoreElement;
 let statusElement;
+let highScoreElement;
+let highScore = 0;
+
+const HIGH_SCORE_KEY = "simple_tetris_high_score";
 
 function createEmptyBoard() {
   return Array.from({ length: BOARD_HEIGHT }, () =>
@@ -172,6 +176,12 @@ function initDom() {
   boardElement = document.getElementById("tetris-board");
   scoreElement = document.getElementById("score-value");
   statusElement = document.getElementById("status-message");
+  highScoreElement = document.getElementById("high-score-value");
+
+  const storedHighScore = Number(localStorage.getItem(HIGH_SCORE_KEY));
+  if (!Number.isNaN(storedHighScore) && storedHighScore > 0) {
+    highScore = storedHighScore;
+  }
 
   boardElement.innerHTML = "";
   cells = [];
@@ -257,6 +267,14 @@ function clearFullLines() {
     else if (linesCleared === 3) points = 500;
     else if (linesCleared >= 4) points = 800;
     score += points;
+    updateHighScoreIfNeeded();
+  }
+}
+
+function updateHighScoreIfNeeded() {
+  if (score > highScore) {
+    highScore = score;
+    localStorage.setItem(HIGH_SCORE_KEY, String(highScore));
   }
 }
 
@@ -287,6 +305,9 @@ function render() {
   }
 
   scoreElement.textContent = String(score);
+  if (highScoreElement) {
+    highScoreElement.textContent = String(highScore);
+  }
 }
 
 function spawnNewPiece() {
@@ -336,6 +357,7 @@ function hardDrop() {
   if (steps > 0) {
     // Reward hard drop distance a little so score changes quickly.
     score += steps * 2;
+    updateHighScoreIfNeeded();
   }
   stepGame();
 }
@@ -348,6 +370,7 @@ function stepGame() {
     mergePieceIntoBoard(currentPiece);
     // Small reward for locking a piece, even without line clears.
     score += 10;
+    updateHighScoreIfNeeded();
     clearFullLines();
     render();
     spawnNewPiece();
